@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="./icon.svg">
+    <link rel="manifest" href="./manifest.json">
+  <title>Custom Screensaver</title>
+</head>
+
+<body>
+  <header class="flex hcenter gap">
+    <img style="width: 48px; height: 48px;" src="./icon.svg">
+    <h1>Custom Screensaver</h1>
+  </header>
+  <p>Choose some images and videos, that'll be displayed in fullscreen mode every <i>x</i> seconds</p><br>
+  <div class="flex mainFlex gap">
+    <div class="card">
+      <h2>Options:</h2>
+      <label class="flex hcenter gap">
+        Change image every (in ms): <input type="number" value="5000" id="interval">
+      </label><br>
+      <label class="flex hcenter gap">
+        Image transition length (in ms) <input type="number" value="500" id="transition">
+      </label><br>
+      <label class="flex hcenter gap">
+        <p>Custom <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter" target="_blank">CSS image filter</a>:</p> <input type="text" id="cssFilter">
+      </label><br>
+      <label class="flex hcenter gap">
+        <input type="checkbox" id="pickFolder">
+        Pick a folder
+      </label><br>
+      <label class="flex hcenter gap">
+        <input type="checkbox" id="saveInStorage">
+        Save the images/video in the browser's storage. If enabled, you won't need to add the images again the next time
+        you'll use this tool. Disable this to use only the images you've selected now.
+      </label><br>
+      <label class="flex hcenter gap">
+        <input type="checkbox" id="hideCursor">Hide the cursor when it's on the image
+      </label><br>
+      <label class="flex hcenter gap">
+        <input type="checkbox" id="maxVideoLength" checked>If a video is being played, wait until it's ended before going to the next image/video
+      </label>
+    </div>
+    <div class="card">
+      <h2>Start screensaver:</h2>
+      <p>You can choose to upload new images/video, or to directly start the screensaver.</p>
+      <button id="upload">Upload files</button><br><br>
+      <button id="start">Start now</button>
+    </div>
+  </div>
+  <div id="container">
+    <div class="topDialog" id="imgDeleteDialog">
+      <p style="text-align: center;">Do you want to delete this image?</p>
+      <div class="flex gap wcenter">
+        <u id="deleteImg">Yes</u>
+        <u id="keepImg">No</u>
+      </div>
+    </div>
+  </div><br><br>
+  <span>Everything is elaborated locally. Nothing is sent to a server.</span>
+  <div class="flex wrap" style="gap: 25px;">
+    <span>Icon made using <a href="https://github.com/microsoft/fluentui-system-icons" target="_blank">Microsoft's Fluent UI Icons</a></span>
+    <a href="https://github.com/dinoosauro/custom-screensaver" target="_blank">View source code</a>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+    <script>
+    const version = "1.0.0";
+    (async () => {
+      const result = await navigator.serviceWorker.register('./service-worker.js', { scope: location.href.substring(0, location.href.lastIndexOf("/") + 1) });
+      if (navigator.onLine) await result.update();
+    })();
+    fetch("./updatecode", { cache: "no-store" }).then((res) => res.text().then((text) => { if (text.replace("\n", "") !== version) if (confirm(`There's a new version of Custom Screensaver. Do you want to update? [${version} --> ${text.replace("\n", "")}]`)) { caches.delete("customscreensaver-cache"); location.reload(true); } }).catch((e) => { console.error(e) })).catch((e) => console.error(e)); // Check if the application code is the same as the current application version and, if not, ask the user to update
+  </script>
+
+</body>
+
+</html>

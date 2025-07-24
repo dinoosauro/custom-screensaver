@@ -1,0 +1,144 @@
+:root {
+  --font: "Work Sans", sans-serif;
+  --background: #151515;
+  --text: #fafafa;
+  --card: #313131;
+  --input: #773030;
+  --opacity-animation: 500ms;
+  --img-cursor: default;
+  --img-filter: none
+}
+body {
+  background-color: var(--background);
+  color: var(--text);
+  padding: 10px;
+  font-family: var(--font);
+}
+
+.card {
+  padding: 10px;
+  background-color: var(--card);
+  border-radius: 12px;
+}
+
+.flex {
+  display: flex;
+}
+
+.hcenter {
+  align-items: center;
+}
+
+.gap {
+  gap: 10px;
+}
+
+button, input {
+  padding: 10px;
+  background-color: var(--input);
+  border: 1px solid var(--text);
+  width: 100%;
+  width: -webkit-fill-available;
+  width: -moz-available;
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font);
+}
+
+#container img, #container video {
+  object-fit: cover;
+  transition: opacity var(--opacity-animation) ease-in-out;
+  opacity: 0.01;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  filter: var(--img-filter)
+}
+
+#container * {
+    cursor: var(--img-cursor);
+}
+
+#container {
+  width: 100vw; 
+  height: 100vh; 
+  display: none;
+  position: fixed;
+  top: 100vh;
+  left: 0px;
+  transition: top 0.2s ease-in-out;
+}
+
+input[type=checkbox] {
+  width: 60px;
+  min-width: 60px;
+  height: 20px;
+  padding: 0px;
+  appearance: none;
+  border-radius: 16px;
+  transition: background-color 0.2s ease-in-out;
+  position: relative;
+  background-color: var(--background);
+}
+input[type=checkbox]::before {
+  content: "";
+  background-color: var(--text);
+  width: 12px;
+  height: 12px;
+  top: 3px;
+  left: 3px;
+  position: absolute;
+  border-radius: 50%;
+  transition: left 0.2s ease-in-out;
+}
+
+input[type=checkbox]:checked::before {
+  left: 43px;
+}
+
+input[type=checkbox]:checked {
+  background-color: var(--input);
+}
+
+button:hover, input[type=checkbox]:hover {
+  cursor: pointer;
+}
+button:hover {
+  filter: brightness(130%);
+}
+button:active {
+  filter: brightness(150%);
+}
+button {
+  transition: filter 0.2s ease-in-out;
+}
+.wcenter {
+  justify-content: center;
+}
+.topDialog {
+  padding: 10px;
+  border-radius: 16px;
+  backdrop-filter: blur(8px) brightness(60%);
+  -webkit-backdrop-filter: blur(8px) brightness(60%);
+  width: calc(70vw - 10px);
+  left: 15vw;
+  top: 10px;
+  transition: opacity 0.2s ease-in-out;
+  opacity: 0;
+  z-index: 3;
+  position: fixed;
+}
+.mainFlex {
+  flex-wrap: wrap;
+}
+.mainFlex > div {
+  flex: 1 0 400px;
+}
+a {
+  color: var(--text);
+}
+.wrap {
+  flex-wrap: wrap;
+}

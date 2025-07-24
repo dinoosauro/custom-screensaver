@@ -1,0 +1,16 @@
+{
+  "name": "Custom Screensaver",
+  "short_name": "Custom Screensaver",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#151515",
+  "theme_color": "#773030",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./icon.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
