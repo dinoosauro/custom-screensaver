@@ -4,7 +4,6 @@ A simple web application that shows your images/videos as a screensaver, that is
 
 Try it: https://dinoosauro.github.io/custom-screensaver/
 
-<video src="./readme_video.mp4" autoplay muted>
 
 Example images from Unsplash
 ## Usage
