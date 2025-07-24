@@ -5,6 +5,11 @@ A simple web application that shows your images/videos as a screensaver, that is
 Try it: https://dinoosauro.github.io/custom-screensaver/
 
 
+
+https://github.com/user-attachments/assets/d7ca9fb7-356e-4bb5-abb6-10ea44e66d83
+
+
+
 Example images from Unsplash
 ## Usage
 
