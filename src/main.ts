@@ -109,8 +109,12 @@ import "@fontsource/work-sans/700.css";
    * The div where the images will be added
    */
   const containerDiv = document.getElementById("container") as HTMLDivElement;
-
+  /**
+   * The WakeLockSentinel that is added when the user clicks on the `start` button
+   */
+  let wakeSentinel: WakeLockSentinel | undefined = undefined;
   document.getElementById("start")?.addEventListener("click", async () => { // Update the values and go in fullscreen mode
+    navigator.wakeLock?.request().then((res) => {wakeSentinel = res;}); // Disable automatic sleep mode
     (document.getElementById("saveInStorage") as HTMLInputElement).checked && await initCursor(); // Get the cursor of the first item, since we'll use the IndexedDB 
     document.body.style.setProperty("--opacity-animation", `${(document.getElementById("transition") as HTMLInputElement).value}ms`);
     updateMouseCursor((document.getElementById("hideCursor") as HTMLInputElement).checked);
@@ -207,6 +211,7 @@ import "@fontsource/work-sans/700.css";
 
   window.addEventListener("fullscreenchange", async () => { // If the user exited from fullscreen mode, hide the containerDiv. Otherwise start the loop
     if (!document.fullscreenElement) {
+      wakeSentinel?.release();
       containerDiv.style.top = "100vh"; // Add a slider transition
       await new Promise(res => setTimeout(res, 210));
       if (!document.fullscreenElement) containerDiv.style.display = "none";
